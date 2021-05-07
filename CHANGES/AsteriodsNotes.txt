@@ -1,0 +1,76 @@
+
+
+=========================================================================
+Game: Asteriods
+Date: 4/12/2021
+Version: v.0.1
+=========================================================================
+Player is set in space and their mission is to destroy all the asteriods
+coming at them so they can reach planet Earth.
+=========================================================================
+
+
+
+=========================================================================
+All Game things:
+ - Player 
+ - Bullets 
+ - Asteriods
+ - Music
+ - UI
+ - Animation
+ - Upgrades
+ - Scrolling background
+=========================================================================
+
+Player:
+ - Shoot bullets [Done]
+ - Move on the x-axis [Done]
+ - Collect upgrades [Working]
+
+Bullets:
+ - travel at a constant velocity in the y axis (direction) [Done]
+ - destroys asteriods [Done]
+ - will be many bullets [Done]
+
+Asteriods:
+ - will be multiple asteriods [Done]
+ - fall on the y-axis [Done]
+ - damage player [Working]
+
+==========================================================================
+ 
+Upgrade System
+
+- Extra health
+- Faster ship speed
+- Extra score
+
+Upgrades:
+- falls in the y axis
+- random spawn 
+- accessed when ship collides with upgrade
+
+
+if player collects speed upgrade 
+player speed is faster (1000 velocity x) for 10 seconds
+
+timer will start for 10 seconds
+after those 10 seconds are done
+velocity is set back to normal speed (300 velocity x)
+
+DONE ! 4/24/2021 1:10 am 
+
+
+Ship gets score from a range of 50-100 when they destory an asteroid [Done]
+When ship collides with asteroids then decrement score [Done]
+
+
+Text appear on screen and fade out when ship collides with any upgrade.
+
+if ship collides with extra health
+show text saying " + 20 health" for a 3 seconds
+then fade out text
+
+==========================================================================
+

@@ -1,0 +1,7 @@
+Asteroid Update Log:
+
+v.0.3 changes to come:
+- fix asteroid spawn
+- fix score hud [fixed]
+- fix the spawn system for upgrades
+- have asteroid spawn in different sizes
