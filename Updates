@@ -1,0 +1,27 @@
+
+v.0.0: 
+- Bullets
+- Random asteroids
+- Scrolling background 
+
+v.0.1: 
+- Added powerups
+- Timer for speed upgrade
+- Collision
+
+v.0.2: 
+- Added health bar
+- Score HUD (Needs fixing)
+- Fade out text animation
+
+v.0.3:
+- Fixed score HUD
+- Fixed asteroid spawner
+- Fixed updgrade spawner
+- Added delay for bullets
+- Animation for ship and explosion
+- Asteroid spawn in different sizes
+
+v.0.4:
+- Added music and sound
+- Added main menu
