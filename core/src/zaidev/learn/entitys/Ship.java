@@ -2,6 +2,7 @@ package zaidev.learn.entitys;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -45,6 +46,7 @@ public class Ship extends Entity {
 
 
     private Animate animate;
+    private Sound sound;
 
 
 
@@ -60,8 +62,7 @@ public class Ship extends Entity {
 
 
         animate = new Animate("ship.png", 0.5f, 17, 32, 0);
-
-
+        sound = Gdx.audio.newSound(Gdx.files.internal("fire.wav"));
     }
 
     private void handleInput(float delta) {
@@ -86,6 +87,9 @@ public class Ship extends Entity {
 
             // delay for shooting bullets
             if(bulletTimer < 0) {
+
+
+                sound.play(0.5f);
 
                 handler.add(new Bullet(x + 23, y, gameScreen, ID.BULLET, handler));
                 handler.add(new Bullet(x, y, gameScreen, ID.BULLET, handler));
@@ -235,7 +239,7 @@ public class Ship extends Entity {
      */
     public void fadeText(Entity entity, String text) {
 
-        Label label = new Label(text, skin);
+        Label label = new Label(text, game.getSkin());
         label.setPosition(entity.getX(), entity.getY() + 64);
         label.setWrap(true);
         label.setFontScale(0.7f);
@@ -259,7 +263,6 @@ public class Ship extends Entity {
     @Override
     public void dispose() {
         texture.dispose();
-        skin.dispose();
 
     }
 

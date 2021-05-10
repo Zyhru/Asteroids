@@ -35,10 +35,6 @@ public class Asteroid extends Entity {
 
         texture = new Texture("asteriod.png");
 
-
-
-
-
         height = width = MathUtils.random(40, 80);
         velY = 2.5f;
         
@@ -116,7 +112,7 @@ public class Asteroid extends Entity {
 
     @Override
     public void dispose() {
-        skin.dispose();
+
         texture.dispose();
 
 

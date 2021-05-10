@@ -14,19 +14,12 @@ public class RespawnScreen implements Screen {
 
     private Boot game;
     private Stage stage;
-    private Skin skin;
-
-    private OrthographicCamera cam;
 
     public RespawnScreen(Boot game) {
         this.game = game;
-        cam = new OrthographicCamera();
         stage = new Stage();
 
-        cam.setToOrtho(false,Boot.WIDTH / 2 + 32 , Boot.HEIGHT / 2 + 32);
-        skin = new Skin(Gdx.files.internal("C:\\Users\\Harvey Munoz\\LibGDX-Animation\\core\\assets\\star-soldier-ui.json"));
-
-        Label label = new Label("Thanks for playing!\n\n\nScore: " + Ship.score + "\n\nPress R to play \nagain!", skin);
+        Label label = new Label("Thanks for playing!\n\n\nScore: " + Ship.score + "\n\nPress R to play \nagain!", game.getSkin());
         label.setWrap(false);
         label.setPosition(Boot.WIDTH / 2 - 145, Boot.HEIGHT / 2);
 
@@ -75,7 +68,6 @@ public class RespawnScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        skin.dispose();
 
 
     }

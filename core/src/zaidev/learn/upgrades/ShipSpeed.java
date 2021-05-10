@@ -57,8 +57,6 @@ public class ShipSpeed extends Entity {
     @Override
     public void dispose() {
         texture.dispose();
-        skin.dispose();
-
     }
 
     @Override

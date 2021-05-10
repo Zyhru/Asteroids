@@ -1,6 +1,8 @@
 package zaidev.learn.entitys;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -21,6 +23,8 @@ public class Bullet extends Entity {
     public static final int BULLET_WIDTH = 5;
     public static final int BULLET_HEIGHT = 5;
     private Random r;
+    private Sound sound;
+
 
 
     public Bullet(int x, int y, GameScreen gameScreen, ID id, Handler handler) {
@@ -35,6 +39,8 @@ public class Bullet extends Entity {
 
         velY = 100;
 
+
+        sound = Gdx.audio.newSound(Gdx.files.internal("bangMedium.wav"));
 
     }
 
@@ -69,6 +75,11 @@ public class Bullet extends Entity {
                     Ship.score += randomScore;
 
 
+                    sound.play(0.5f);
+
+
+
+
                     list.add(tempObject);
                     list.add(this);
                 }
@@ -92,7 +103,7 @@ public class Bullet extends Entity {
     @Override
     public void dispose() {
         texture.dispose();
-        skin.dispose();
+        sound.dispose();
     }
 
     @Override

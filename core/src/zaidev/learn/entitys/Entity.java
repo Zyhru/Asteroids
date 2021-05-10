@@ -19,7 +19,7 @@ public abstract class Entity {
     protected int width, height;
     protected ID id;
     protected Handler handler;
-    protected final Skin skin = new Skin(Gdx.files.internal("C:\\Users\\Harvey Munoz\\LibGDX-Animation\\core\\assets\\star-soldier-ui.json"));
+
 
 
     public Entity(int x, int y, GameScreen gameScreen, ID id, Handler handler) {

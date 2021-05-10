@@ -37,7 +37,6 @@ public class HealthUpgrade extends Entity {
     @Override
     public void dispose() {
 
-        skin.dispose();
         texture.dispose();
     }
 

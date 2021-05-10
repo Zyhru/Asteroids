@@ -2,6 +2,7 @@ package zaidev.learn.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,15 +18,12 @@ import zaidev.learn.managers.Handler;
 
 import java.util.Random;
 
-import static zaidev.learn.Boot.HEIGHT;
-import static zaidev.learn.Boot.WIDTH;
+import static zaidev.learn.Boot.*;
 
 
 public class GameScreen implements Screen {
 
     private Boot                game;
-    private OrthographicCamera  cam;
-    private SpriteBatch         sb;
     private Texture             texture;
     private Sprite              background;
     private Random              r;
@@ -34,9 +32,8 @@ public class GameScreen implements Screen {
     private UI                  ui;
     private Stage               stage;
     private Label               label;
+    private Music               music;
 
-    private Skin                skin;
-    private final FPSLogger logger = new FPSLogger();
 
 
 
@@ -44,21 +41,12 @@ public class GameScreen implements Screen {
 
     public GameScreen(Boot game) {
         this.game = game;
-        sb = new SpriteBatch();
         r = new Random();
         handler = new Handler();
-
-
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false, WIDTH / 2 + 32, HEIGHT / 2 + 32);
-
-
-        ui = new UI(WIDTH - 4, 10);
-        skin = new Skin(Gdx.files.internal("C:\\Users\\Harvey Munoz\\LibGDX-Animation\\core\\assets\\star-soldier-ui.json"));
-
         stage = new Stage();
 
-        label = new Label("Score " + Ship.score, skin);
+        ui = new UI(WIDTH - 4, 10);
+        label = new Label("Score " + Ship.score, game.getSkin());
         label.setPosition(8, 560);
 
         stage.addActor(ui);
@@ -68,13 +56,10 @@ public class GameScreen implements Screen {
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         background = new Sprite(texture);
 
-          handler.add(new Ship(      WIDTH / 2 - 64,50, this, ID.Ship,  handler));
-//        handler.add(new ShipSpeed( WIDTH / 2 - 50, 300,  this, ID.SPEED, handler));
-
-
+        handler.add(new Ship(WIDTH / 2 - 64,50, this, ID.Ship,  handler));
 
         initAsteroids();
-
+        initMusic();
 
 
     }
@@ -86,6 +71,15 @@ public class GameScreen implements Screen {
 
     public Stage getStage() { return stage; }
 
+
+    private void initMusic() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("SLOWER-TEMPO2019-12-09_-_Retro_Forest_-_David_Fesliyan.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.5f);
+        music.play();
+
+
+    }
 
     private void initAsteroids() {
 
@@ -106,20 +100,8 @@ public class GameScreen implements Screen {
 
     public void update(float delta) {
 
-        cam.update();
-
         handler.update(delta);
         label.setText("Score " + Ship.score);
-
-
-//        if(Math.random() < 0.002f) {
-//            handler.add(new ShipSpeed( r.nextInt(WIDTH / 2  - 16), HEIGHT - 96,  this, ID.SPEED, handler));
-//            handler.add(new ScoreUpgrade( r.nextInt(WIDTH / 2  - 16), HEIGHT - 96,  this, ID.SCORE, handler));
-//            handler.add(new HealthUpgrade( r.nextInt(WIDTH / 2  - 16), HEIGHT - 96,  this, ID.HEALTH, handler));
-//
-//        }
-//
-
 
 
     }
@@ -128,22 +110,21 @@ public class GameScreen implements Screen {
     public void render(float delta) {
 
 
-
-        sb.setProjectionMatrix(cam.combined);
+        game.getBatch().setProjectionMatrix(game.getCamera().combined);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         update(delta);
-        sb.begin();
+        game.getBatch().begin();
 
-        background.draw(sb);
+
+
+        background.draw(game.getBatch());
         background.scroll(0,-0.1f * delta);
 
 
         // rendering game objects
-        handler.render(sb);
+        handler.render(game.getBatch());
 
-        sb.end();
-
-
+        game.getBatch().end();
 
 
         // render health bar
@@ -177,11 +158,10 @@ public class GameScreen implements Screen {
     public void dispose() {
 
         texture.dispose();
-        sb.dispose();
         handler.dispose();
         ui.dispose();
         stage.dispose();
-        skin.dispose();
+        music.dispose();
 
     }
 }

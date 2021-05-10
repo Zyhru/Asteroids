@@ -46,7 +46,6 @@ public class ScoreUpgrade extends Entity {
     @Override
     public void dispose() {
 
-        skin.dispose();
         texture.dispose();
     }
 
